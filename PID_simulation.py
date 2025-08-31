@@ -5,13 +5,13 @@ from random import *
 
 ######################################################################################
 # Time
-step_size = 0.5
+step_size = 0.1
 time_limit = 1000  # Increase or decrease if timing out too quickly / taking too long
 ######################################################################################
 # Stuff to change
-kP = 0.25             # kP 0.25
-kI = 0.05             # kI 0.05
-kD = 2.25             # kD 2.25
+kP = 2              # kP 2
+kI = 0.05           # kI 0.05
+kD = 0.5            # kD 0.5
 initial_angle = 0     # Initial Angle
 target_angle = 1000   # Target Angle
 
@@ -21,9 +21,9 @@ settle_speed = 5
 ######################################################################################
 # Keep same
 max_speed = 300        # Max Velocity of model
-max_acceleration = 75  # Max Acceleration of model
-minimum_acceleration = 20
-coefficient_of_friction = 0.15  # Coefficient of kinetic friction #0.15
+max_acceleration = 1000  # Max Acceleration of model #75
+minimum_acceleration = 15
+coefficient_of_friction = 25  # Coefficient of kinetic friction #0.15
 randomness_coefficient = 0.5    # Randomness of how quickly it slows down
 ######################################################################################
 # Arrays
@@ -42,7 +42,7 @@ def controller(starting_angle, target_angle, kP, kI, kD):
     derivative_error_array.append(derivative_error)
 
 
-    if abs(error_array[-1]) < 50:
+    if abs(error_array[-1]) < 200:
         integral_error_array.append(integral_error_array[-1] + error_array[-1] * step_size)
     else:
         integral_error_array.append(0)
